@@ -1,0 +1,45 @@
+# IDE files and Python caches
+.idea/
+.vscode/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Local credentials and runtime output
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.log
+logs/
+tmp/
+
+# Model binaries and local datasets
+model/
+models/
+weights/
+datasets/
+*.engine
+*.pt
+*.pth
+*.onnx
+*.pdmodel
+*.pdiparams
+
+# Manuscripts and private project materials
+*.doc
+*.docx
+*.pdf
+*.ppt
+*.pptx
+papers/
+patents/
+private/
+review_materials/
+
+# Desktop metadata
+.DS_Store
+Thumbs.db

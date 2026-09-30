@@ -1,0 +1,5 @@
+# Common Python dependencies only. See docs/SETUP.md for route-specific runtimes.
+numpy
+opencv-python
+Pillow
+pyserial
