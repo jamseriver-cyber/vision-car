@@ -26,6 +26,8 @@ Vision-based smart car with lane following, traffic-sign responses, and voice fe
 | `requirements-common.txt` | 常用 Python 依赖清单 |
 | [运行配置说明](docs/SETUP.md) | 环境、模型、设备和启动方式 |
 | [代码结构说明](docs/CODE_MAP.md) | 两套程序的输入、处理及输出关系 |
+| [模型清单](docs/MODELS.md) | 已提供模型、路径差异和校验方法 |
+| `model/` | 原始 PaddlePaddle 模型及 YOLOv5 权重 |
 
 ## 技术栈
 
@@ -35,14 +37,16 @@ Python、OpenCV、NumPy、ROS 1、TensorRT、PyCUDA、PaddlePaddle、PyTorch、Y
 
 本仓库提供控制与语音程序。运行还需要与车辆配套的模型、ROS 消息、底盘驱动或串口协议、摄像头及音频文件。
 
-当前代码目录未包含以下资源：
+仓库已包含原始模型目录：9套 PaddlePaddle 静态图模型，以及 `model/yolov5_model/best.pt`。各套模型保留原文件名和目录名，详见 [模型清单](docs/MODELS.md)。
 
-- TensorRT `.engine` 文件、PaddlePaddle 循迹模型及 YOLOv5 权重。
+当前仓库仍未包含以下资源：
+
+- ROS/TensorRT 路线所需的 `.engine` 文件。
 - ROS 的 `e2e` 消息包，以及发布 `/yolo_sign` 的检测节点。
 - `SY4Y.py` 导入的 `hex_change.py` 和配套 YOLOv5 源码。
 - `.wav` 语音文件及实际车辆底盘驱动。
 
-请先按 [运行配置说明](docs/SETUP.md) 补齐所选路线的依赖。源码中保留了原平台的路径和控制参数，需要在自己的平台上核对。程序会输出车辆运动指令，首次联调时应架空驱动轮，并准备可直接断开动力的方式。
+请先按 [运行配置说明](docs/SETUP.md) 补齐所选路线的依赖。源码中保留了原平台的路径和控制参数；`SY4Y.py` 的部分默认模型目录与已提供目录不同，需要按实际训练配置核对，不能仅凭目录名称直接替换。程序会输出车辆运动指令，首次联调时应架空驱动轮，并准备可直接断开动力的方式。
 
 ## 快速选择
 

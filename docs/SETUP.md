@@ -73,7 +73,7 @@ aplay -D plughw:3,0 /path/to/turn_left.wav
 - 支持源码所用 `paddle.fluid` 静态图接口的 PaddlePaddle 环境。
 - PyTorch 和与源码导入路径兼容的 YOLOv5 工程。
 - 提供 `car_drive` 函数的原工程 `hex_change.py`。
-- 配套车道模型、标志模型、串口底盘与摄像头。
+- 本仓库 `model/` 中的原始车道及标志模型，以及配套串口底盘与摄像头。
 
 源码使用 `utils.datasets.letterbox` 等旧版 YOLOv5 路径。需使用对应的工程版本，不能假定任意新版依赖都兼容。串口版本的文件头记录了 STM32 控制链路，ROS 版本则通过底盘话题输出指令，不能直接互换。
 
@@ -88,7 +88,9 @@ aplay -D plughw:3,0 /path/to/turn_left.wav
 | 标志检测权重 | `../model/yolov5_model/best.pt` |
 | 车道模型 | `SY4Y.py` 中的 `model_paths` 字典 |
 
-路径相对于程序的运行位置解析，运行前请核对模型目录布局及设备别名。
+路径相对于程序的运行位置解析，运行前请核对模型目录布局及设备别名。当前仓库将模型放在根目录下的 `model/`，而原程序使用 `../model/`。若从仓库根目录启动，请在本地配置中使用相应的 `./model/` 路径。
+
+已提供的模型目录不包含 `SY4Y.py` 默认引用的 `5.11_Left_1`、`6.26_Right_1` 和 `model_3b`。`model_infer` 与 `yolov5_model/best.pt` 有同名对应资源，但本次未核验它们是否为该程序原来使用的训练版本。请按原训练配置选择对应模型，不要通过重命名目录来假定兼容。全部目录及校验清单见 [模型清单](MODELS.md)。
 
 ### 语音配置
 
@@ -103,4 +105,4 @@ python3 SY4Y.py
 
 ## 复现边界
 
-本次整理检查了 Python 语法及上传文件的一致性，没有启动电机、ROS 控制节点或 GPU 推理。原始模型、消息包、音频和底盘协议未提供时，不能完成整车运行验证。
+本次整理检查了 Python 语法及上传文件的一致性，并提供原始 PaddlePaddle 模型和 YOLOv5 权重，没有启动电机、ROS 控制节点或 GPU 推理。TensorRT 引擎、消息包、音频和底盘协议仍需补齐并在实际设备上验证。

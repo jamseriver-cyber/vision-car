@@ -18,7 +18,6 @@ logs/
 tmp/
 
 # Model binaries and local datasets
-model/
 models/
 weights/
 datasets/
@@ -28,6 +27,9 @@ datasets/
 *.onnx
 *.pdmodel
 *.pdiparams
+
+# Published original model checkpoint
+!/model/yolov5_model/best.pt
 
 # Manuscripts and private project materials
 *.doc
